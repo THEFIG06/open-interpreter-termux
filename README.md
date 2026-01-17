@@ -71,6 +71,43 @@ Note, `OS mode` is not currently supported on Android
 
 ---
 
+## Troubleshooting
+
+### Node.js Native Module Build Errors
+
+If you're trying to install Node.js packages that include native modules (like `node-pty`, `sqlite3`, etc.) and encounter this error:
+
+```
+gyp: Undefined variable android_ndk_path in binding.gyp while trying to load binding.gyp
+```
+
+**Quick Fix:**
+
+Run the provided fix script:
+
+```bash
+bash fix-termux-node-gyp.sh
+```
+
+Or manually create the configuration:
+
+```bash
+mkdir -p ~/.gyp
+cat > ~/.gyp/include.gypi << 'EOF'
+{
+  "variables": {
+    "android_ndk_path": ""
+  }
+}
+EOF
+```
+
+Then try installing your package again with `npm install`.
+
+For detailed information and alternative solutions, see [TERMUX_NODE_PTY_FIX.md](TERMUX_NODE_PTY_FIX.md)
+
+---
+
 ## Considerations
 
 ### Updating config.yaml

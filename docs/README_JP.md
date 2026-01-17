@@ -68,6 +68,43 @@ interpreter
 
 ---
 
+## トラブルシューティング
+
+### Node.jsネイティブモジュールのビルドエラー
+
+`node-pty`、`sqlite3`などのネイティブモジュールを含むNode.jsパッケージをインストールしようとして、以下のエラーが発生した場合:
+
+```
+gyp: Undefined variable android_ndk_path in binding.gyp while trying to load binding.gyp
+```
+
+**クイックフィックス:**
+
+提供されている修正スクリプトを実行:
+
+```bash
+bash fix-termux-node-gyp.sh
+```
+
+または、手動で設定を作成:
+
+```bash
+mkdir -p ~/.gyp
+cat > ~/.gyp/include.gypi << 'EOF'
+{
+  "variables": {
+    "android_ndk_path": ""
+  }
+}
+EOF
+```
+
+その後、`npm install`でパッケージを再インストールしてください。
+
+詳細な情報と代替ソリューションについては、[TERMUX_NODE_PTY_FIX.md](../TERMUX_NODE_PTY_FIX.md)をご覧ください。
+
+---
+
 ## 注意点
 
 ### config.yamlの更新について
