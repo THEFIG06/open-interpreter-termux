@@ -75,8 +75,7 @@ yes | pkg install x11-repo
 #### 3. Install Required Packages
 ```bash
 yes | pkg install termux-api python python-pip \
-    python-grpcio python-pillow \
-    python-numpy python-tokenizers python-pyzmq \
+    python-grpcio python-pillow python-numpy \
     cmake ninja patchelf rust binutils libzmq git wget curl nano
 ```
 

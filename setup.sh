@@ -74,8 +74,6 @@ REQUIRED_PACKAGES=(
     "python-grpcio"      # pre-built — avoids >1h source compilation
     "python-pillow"      # pre-built — avoids source compilation
     "python-numpy"       # pre-built
-    "python-tokenizers"  # pre-built
-    "python-pyzmq"       # pre-built — replaces libzmq pip build
     "cmake"
     "ninja"
     "patchelf"
