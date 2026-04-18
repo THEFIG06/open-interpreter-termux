@@ -59,6 +59,10 @@ yes | pkg update && yes | pkg upgrade
 
 print_success "Packages updated successfully!"
 
+# Enable x11-repo for pre-built Python packages (grpcio, pillow, etc.)
+print_info "Enabling x11 repository for pre-built Python binaries..."
+yes | pkg install x11-repo
+
 # Install required packages
 print_info "Installing required packages..."
 print_info "This will take a while. Please be patient..."
@@ -67,11 +71,15 @@ REQUIRED_PACKAGES=(
     "termux-api"
     "python"
     "python-pip"
+    "python-grpcio"      # pre-built — avoids >1h source compilation
+    "python-pillow"      # pre-built — avoids source compilation
+    "python-matplotlib"  # pre-built — correct package name
+    "python-numpy"       # pre-built
+    "python-tokenizers"  # pre-built
+    "python-pyzmq"       # pre-built — replaces libzmq pip build
     "cmake"
     "ninja"
     "patchelf"
-    "build-essential"
-    "matplotlib"
     "rust"
     "binutils"
     "libzmq"
@@ -102,9 +110,10 @@ else
     print_error "Storage setup failed. Please run 'termux-setup-storage' manually."
 fi
 
-# Upgrade pip
-print_info "Upgrading pip to latest version..."
+# Upgrade pip and install required build tools
+print_info "Upgrading pip and installing build tools..."
 pip install --upgrade pip
+pip install -U setuptools wheel meson-python
 
 # Install Open Interpreter with optimizations
 print_info "Installing Open Interpreter..."

@@ -67,28 +67,34 @@ Open Termux and run the following commands:
 yes | pkg update && yes | pkg upgrade
 ```
 
-#### 2. Install Required Packages
+#### 2. Enable x11 Repository (required for pre-built Python packages)
 ```bash
-yes | pkg install termux-api python python-pip cmake ninja patchelf build-essential matplotlib rust binutils libzmq git wget curl nano
+yes | pkg install x11-repo
 ```
 
-**For high-end devices (8GB+ RAM)** - Install additional packages:
+#### 3. Install Required Packages
 ```bash
-yes | pkg install numpy pandas scipy
+yes | pkg install termux-api python python-pip \
+    python-grpcio python-pillow python-matplotlib \
+    python-numpy python-tokenizers python-pyzmq \
+    cmake ninja patchelf rust binutils libzmq git wget curl nano
 ```
 
-#### 3. Setup Storage Permissions
+> ⚠️ `build-essential` and bare `matplotlib` are **not valid** Termux packages — the above list uses the correct pre-built binaries, which cuts install time from >1 hour to ~10-15 min.
+
+#### 4. Setup Storage Permissions
 ```bash
 termux-setup-storage
 ```
 ⚠️ Grant permission when prompted. If it fails, run the command again.
 
-#### 4. Upgrade pip
+#### 5. Upgrade pip and build tools
 ```bash
 pip install --upgrade pip
+pip install -U setuptools wheel meson-python
 ```
 
-#### 5. Install Open Interpreter
+#### 6. Install Open Interpreter
 
 **Standard installation:**
 ```bash
@@ -100,7 +106,7 @@ pip install open-interpreter
 pip install "open-interpreter[local,os,safe]"
 ```
 
-#### 6. Configure API Keys
+#### 7. Configure API Keys
 
 Choose your AI provider:
 
@@ -123,7 +129,7 @@ pkg install ollama
 # Then use models like: interpreter --model ollama/llama2
 ```
 
-#### 7. Start Open Interpreter
+#### 8. Start Open Interpreter
 ```bash
 interpreter
 ```

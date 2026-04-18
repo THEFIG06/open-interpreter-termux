@@ -67,28 +67,34 @@ Termuxを開いて以下のコマンドを実行:
 yes | pkg update && yes | pkg upgrade
 ```
 
-#### 2. 必要なパッケージをインストール
+#### 2. x11リポジトリを有効化 (ビルド済みPythonパッケージに必要)
 ```bash
-yes | pkg install termux-api python python-pip cmake ninja patchelf build-essential matplotlib rust binutils libzmq git wget curl nano
+yes | pkg install x11-repo
 ```
 
-**ハイエンドデバイス(8GB以上のRAM)の場合** - 追加パッケージをインストール:
+#### 3. 必要なパッケージをインストール
 ```bash
-yes | pkg install numpy pandas scipy
+yes | pkg install termux-api python python-pip \
+    python-grpcio python-pillow python-matplotlib \
+    python-numpy python-tokenizers python-pyzmq \
+    cmake ninja patchelf rust binutils libzmq git wget curl nano
 ```
 
-#### 3. ストレージ権限を設定
+> ⚠️ `build-essential` と bare `matplotlib` は**有効なTermuxパッケージではありません** — 上記のリストはビルド済みバイナリを使用し、インストール時間を1時間超から約10〜15分に短縮します。
+
+#### 4. ストレージ権限を設定
 ```bash
 termux-setup-storage
 ```
 ⚠️ プロンプトが表示されたら権限を付与してください。失敗した場合は、コマンドを再度実行してください。
 
-#### 4. pipをアップグレード
+#### 5. pipとビルドツールをアップグレード
 ```bash
 pip install --upgrade pip
+pip install -U setuptools wheel meson-python
 ```
 
-#### 5. Open Interpreterをインストール
+#### 6. Open Interpreterをインストール
 
 **標準インストール:**
 ```bash
@@ -100,7 +106,7 @@ pip install open-interpreter
 pip install "open-interpreter[local,os,safe]"
 ```
 
-#### 6. APIキーを設定
+#### 7. APIキーを設定
 
 AIプロバイダーを選択:
 
@@ -123,7 +129,7 @@ pkg install ollama
 # 次に使用: interpreter --model ollama/llama2
 ```
 
-#### 7. Open Interpreterを起動
+#### 8. Open Interpreterを起動
 ```bash
 interpreter
 ```

@@ -71,11 +71,12 @@ python --version
 
 #### Error: "Failed building wheel"
 ```bash
-# Install build dependencies
-pkg install build-essential python-dev
+# Install build dependencies (note: build-essential does NOT exist in Termux)
+yes | pkg install x11-repo
+yes | pkg install python-grpcio python-pillow python-numpy python-tokenizers python-pyzmq
 
 # Upgrade pip and setuptools
-pip install --upgrade pip setuptools wheel
+pip install --upgrade pip setuptools wheel meson-python
 
 # Try installing again
 pip install open-interpreter --no-cache-dir
