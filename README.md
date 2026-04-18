@@ -75,7 +75,7 @@ yes | pkg install x11-repo
 #### 3. Install Required Packages
 ```bash
 yes | pkg install termux-api python python-pip \
-    python-grpcio python-pillow python-matplotlib \
+    python-grpcio python-pillow \
     python-numpy python-tokenizers python-pyzmq \
     cmake ninja patchelf rust binutils libzmq git wget curl nano
 ```
@@ -91,7 +91,7 @@ termux-setup-storage
 #### 5. Upgrade pip and build tools
 ```bash
 pip install --upgrade pip
-pip install -U setuptools wheel meson-python
+pip install -U setuptools wheel meson-python matplotlib
 ```
 
 #### 6. Install Open Interpreter

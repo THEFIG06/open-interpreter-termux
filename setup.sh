@@ -73,7 +73,6 @@ REQUIRED_PACKAGES=(
     "python-pip"
     "python-grpcio"      # pre-built — avoids >1h source compilation
     "python-pillow"      # pre-built — avoids source compilation
-    "python-matplotlib"  # pre-built — correct package name
     "python-numpy"       # pre-built
     "python-tokenizers"  # pre-built
     "python-pyzmq"       # pre-built — replaces libzmq pip build
@@ -113,7 +112,7 @@ fi
 # Upgrade pip and install required build tools
 print_info "Upgrading pip and installing build tools..."
 pip install --upgrade pip
-pip install -U setuptools wheel meson-python
+pip install -U setuptools wheel meson-python matplotlib
 
 # Install Open Interpreter with optimizations
 print_info "Installing Open Interpreter..."
